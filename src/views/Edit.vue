@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Form :toy="toy"/>
+        <Form :toy="toy" :edit='true'/>
     </div>
 </template>
 <script>
@@ -15,8 +15,7 @@ export default {
         ...mapState(['toys']),
         toy(){
             const toy = this.toys.find((t) => t.id == this.$route.params.id);
-            console.log(toy)
-            return toy.data
+            return toy
         }
     }
     

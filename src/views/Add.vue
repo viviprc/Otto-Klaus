@@ -1,6 +1,7 @@
 <template>
   <div class="add">
     <Form :showClean='true'/>
+    
   </div>
 </template>
 <script>

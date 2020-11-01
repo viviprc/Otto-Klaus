@@ -1,5 +1,8 @@
 <template>
   <v-container>
+     <div class="alerta">
+          <v-alert v-model="alert" dismissible dense max-width="350" type="success">¡Producto eliminado correctamente!</v-alert>
+    </div>
     <v-row justify="center">
       <v-simple-table>
         <template v-slot:default>
@@ -13,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in toys" :key="item.nombre">
+            <tr v-for="item in toysWithStock" :key="item.nombre">
               <td>{{ item.data.codigo }}</td>
               <td>{{ item.data.nombre }}</td>
               <td>{{ item.data.stock }}</td>
@@ -65,6 +68,7 @@ export default {
   },
   data() {
     return {
+      alert: false,
       dialog: false,
       eliminate: false,
       currentToy: undefined
@@ -72,24 +76,23 @@ export default {
   },
   computed: {
     ...mapState(["toys"]),
+    toysWithStock(){
+      return this.toys.filter((t) => t.data.stock > 0)
+    }
   },
   methods: {
     ...mapActions(["remove_toy"]),
     removeToy() {
       this.remove_toy(this.currentToy);
-      this.eliminate = false
+      this.eliminate = false;
+      this.alert = true
     },
     eliminateToy(id){
       this.eliminate = true;
       this.currentToy = id
     },
-    saveChanges(id) {
-      this.dialog = false;
-      console.log(id);
-    },
     closeModal() {
       this.dialog = false;
-    //   this.currentToy = undefined
     },
     editToy(id){
       this.$router.push(`edit/${id}`);

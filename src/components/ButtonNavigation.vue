@@ -41,7 +41,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push("login");
+          this.$router.push("/login");
           this.setUser(false)
         });
     },

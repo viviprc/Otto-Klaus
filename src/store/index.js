@@ -58,10 +58,12 @@ export default new Vuex.Store({
      }
      
 
-      commit('ADD_DATA', juguete)
     },
     remove_toy({commit}, id){
       firebase.firestore().collection('toys').doc(id).delete();
+    },
+    updateData({commit}, payload){
+      firebase.firestore().collection('toys').doc(payload.id).update(payload)
     }
     
 
