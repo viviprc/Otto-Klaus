@@ -1,7 +1,9 @@
 <template>
   <v-container>
-     <div class="alerta">
-          <v-alert v-model="alert" dismissible dense max-width="350" type="success">¡Producto eliminado correctamente!</v-alert>
+    <div class="alerta">
+      <v-alert v-model="alert" dismissible dense max-width="350" type="success"
+        >¡Producto eliminado correctamente!</v-alert
+      >
     </div>
     <v-row justify="center">
       <v-simple-table>
@@ -47,12 +49,11 @@
           <v-btn @click="eliminate = false">Cancelar</v-btn>
         </v-card-actions>
       </v-card>
-
     </v-dialog>
     <v-dialog v-model="dialog" persistent max-width="400">
       <v-card>
         <v-card-title class="headline"> Editar Producto </v-card-title>
-        <Form :showCancel="true" :cancel="closeModal" :toy='currentToy' />
+        <Form :showCancel="true" :cancel="closeModal" :toy="currentToy" />
       </v-card>
     </v-dialog>
   </v-container>
@@ -71,32 +72,43 @@ export default {
       alert: false,
       dialog: false,
       eliminate: false,
-      currentToy: undefined
+      currentToy: undefined,
     };
   },
   computed: {
     ...mapState(["toys"]),
-    toysWithStock(){
-      return this.toys.filter((t) => t.data.stock > 0)
-    }
+    toysWithStock() {
+      const listaOrdenada = this.toys
+        .filter((t) => t.data.stock > 0)
+        .sort((t1, t2) => {
+          if (t1.data.codigo > t2.data.codigo) {
+            return 1;
+          } else if (t1.data.codigo < t2.data.codigo) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+      return listaOrdenada;
+    },
   },
   methods: {
     ...mapActions(["remove_toy"]),
     removeToy() {
       this.remove_toy(this.currentToy);
       this.eliminate = false;
-      this.alert = true
+      this.alert = true;
     },
-    eliminateToy(id){
+    eliminateToy(id) {
       this.eliminate = true;
-      this.currentToy = id
+      this.currentToy = id;
     },
     closeModal() {
       this.dialog = false;
     },
-    editToy(id){
+    editToy(id) {
       this.$router.push(`edit/${id}`);
-    }
+    },
   },
 };
 </script>
