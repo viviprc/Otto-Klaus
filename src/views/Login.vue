@@ -11,11 +11,6 @@
               </v-list-item-title>
             </v-list-item-content>
 
-            <v-list-item-avatar tile size="80">
-              <v-img
-                src="https://lh3.googleusercontent.com/proxy/Lt1wPZbEPSYMpK6ImvM4clsGfXY7ngZ_yz9FJcbnIsM3P2ENQGvFRvzarSeJ5hMEbP7YMsm31t30iTEiWgXTdJ0719MathH0HOkCV8qVe0-e"
-              ></v-img
-            ></v-list-item-avatar>
           </v-list-item>
           <v-card-actions>
             <v-btn
